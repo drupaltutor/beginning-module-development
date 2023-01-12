@@ -63,4 +63,35 @@ class RouteExampleController extends ControllerBase {
     return $this->t('Information About @user', ['@user' => $user->getDisplayName()]);
   }
 
+
+  public function nodeList(string $type) {
+    $node_storage = $this->entityTypeManager()->getStorage('node');
+    $nids = $node_storage->getQuery()
+        ->accessCheck(TRUE)
+        ->condition('type', $type)
+        ->range(0, 10)
+        ->execute();
+    $nodes = $node_storage->loadMultiple($nids);
+
+    $header = [
+      $this->t('ID'),
+      $this->t('Type'),
+      $this->t('Title'),
+    ];
+    $rows = [];
+    foreach ($nodes as $node) {
+      $rows[] = [
+        $node->id(),
+        $node->bundle(),
+        $node->label(),
+      ];
+    }
+
+    return [
+      '#theme' => 'table',
+      '#header' => $header,
+      '#rows' => $rows,
+    ];
+  }
+
 }
