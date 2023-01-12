@@ -5,6 +5,7 @@ namespace Drupal\route_examples\Controller;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
 
 class RouteExampleController extends ControllerBase {
@@ -96,5 +97,14 @@ class RouteExampleController extends ControllerBase {
       '#rows' => $rows,
     ];
   }
+
+  public function nodeCompare(NodeInterface $node1, NodeInterface $node2) {
+    $diff = $node1->getCreatedTime() - $node2->getCreatedTime();
+
+    return [
+      '#markup' => t('Created Time Difference: @diff seconds', ['@diff' => $diff]),
+    ];
+  }
+
 
 }
