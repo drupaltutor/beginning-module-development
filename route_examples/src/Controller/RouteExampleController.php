@@ -11,4 +11,14 @@ class RouteExampleController extends ControllerBase {
       '#markup' => $this->t('Hello world!'),
     ];
   }
+
+  public function helloUser() {
+    return [
+      '#markup' => $this->t('Hello @user', ['@user' => $this->currentUser()->getDisplayName()])
+    ];
+  }
+
+  public function helloUserTitle() {
+    return $this->t('Hello @user', ['@user' => $this->currentUser()->getDisplayName()]);
+  }
 }
