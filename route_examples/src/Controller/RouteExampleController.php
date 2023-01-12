@@ -64,12 +64,12 @@ class RouteExampleController extends ControllerBase {
   }
 
 
-  public function nodeList(string $type) {
+  public function nodeList(int $limit, string $type) {
     $node_storage = $this->entityTypeManager()->getStorage('node');
     $nids = $node_storage->getQuery()
         ->accessCheck(TRUE)
         ->condition('type', $type)
-        ->range(0, 10)
+        ->range(0, $limit)
         ->execute();
     $nodes = $node_storage->loadMultiple($nids);
 
