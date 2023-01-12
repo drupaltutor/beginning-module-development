@@ -2,11 +2,13 @@
 
 namespace Drupal\route_examples\Controller;
 
-class RouteExampleController {
+use Drupal\Core\Controller\ControllerBase;
+
+class RouteExampleController extends ControllerBase {
 
   public function helloWorld() {
     return [
-      '#markup' => 'Hello world!',
+      '#markup' => $this->t('Hello world!'),
     ];
   }
 }
