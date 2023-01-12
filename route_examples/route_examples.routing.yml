@@ -33,3 +33,4 @@ route_examples.node_list:
     _admin_route: TRUE
   requirements:
     _permission: 'access content'
+    limit: '\d+'
