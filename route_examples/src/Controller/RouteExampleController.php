@@ -66,11 +66,14 @@ class RouteExampleController extends ControllerBase {
 
   public function nodeList(int $limit, string $type) {
     $node_storage = $this->entityTypeManager()->getStorage('node');
-    $nids = $node_storage->getQuery()
-        ->accessCheck(TRUE)
-        ->condition('type', $type)
-        ->range(0, $limit)
-        ->execute();
+    $query = $node_storage->getQuery()
+      ->accessCheck(TRUE)
+      ->range(0, $limit);
+    if ($type !== '_all') {
+      $query->condition('type', $type);
+    }
+    $nids = $query->execute();
+
     $nodes = $node_storage->loadMultiple($nids);
 
     $header = [

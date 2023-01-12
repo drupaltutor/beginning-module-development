@@ -27,6 +27,8 @@ route_examples.node_list:
   defaults:
     _controller: '\Drupal\route_examples\Controller\RouteExampleController::nodeList'
     _title: 'Node List'
+    limit: 10
+    type: _all
   options:
     _admin_route: TRUE
   requirements:
