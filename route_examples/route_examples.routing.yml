@@ -27,5 +27,7 @@ route_examples.node_list:
   defaults:
     _controller: '\Drupal\route_examples\Controller\RouteExampleController::nodeList'
     _title: 'Node List'
+  options:
+    _admin_route: TRUE
   requirements:
     _permission: 'access content'
