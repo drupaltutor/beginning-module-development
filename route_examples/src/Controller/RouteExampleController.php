@@ -4,7 +4,9 @@ namespace Drupal\route_examples\Controller;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Xss;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
 
@@ -105,6 +107,17 @@ class RouteExampleController extends ControllerBase {
       '#markup' => t('Created Time Difference: @diff seconds', ['@diff' => $diff]),
     ];
   }
+
+  public function userInfoAccess(AccountInterface $account, UserInterface $user) {
+    if ($account->hasPermission('view any user info')) {
+      return AccessResult::allowed();
+    }
+    if ($account->hasPermission('view own user info') && $account->id() == $user->id()) {
+      return AccessResult::allowed();
+    }
+    return AccessResult::forbidden();
+  }
+
 
 
 }
