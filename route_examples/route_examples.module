@@ -10,3 +10,9 @@ function route_examples_menu_links_discovered_alter(&$links) {
 function route_examples_menu_local_actions_alter(&$local_actions) {
   $local_actions['node.add_page']['title'] = t('Add new node');
 }
+
+function route_examples_menu_local_tasks_alter(&$data, $route_name) {
+  if ($route_name == 'entity.node.canonical') {
+    $data['tabs'][0]['entity.node.edit_form']['#link']['title'] = t('Update');
+  }
+}
