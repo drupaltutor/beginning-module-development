@@ -1,0 +1,5 @@
+route_examples.add_user:
+  route_name: user.admin_create
+  title: 'Create new user'
+  appears_on:
+    - route_examples.user_info
