@@ -3,3 +3,4 @@ route_examples.add_user:
   title: 'Create new user'
   appears_on:
     - route_examples.user_info
+    - route_examples.hello_user
