@@ -4,5 +4,5 @@
  * Implements hook_menu_links_discovered_alter().
  */
 function route_examples_menu_links_discovered_alter(&$links) {
-
+  $links['entity.user.collection']['title'] = t('Users');
 }
