@@ -56,8 +56,7 @@ class RouteExampleController extends ControllerBase {
 
   public function userInfo(UserInterface $user) {
     $build = [];
-    /** @var \Drupal\Core\Datetime\DateFormatterInterface */
-    $date_formater = \Drupal::service('date.formatter');
+
     $build[] = [
       '#type' => 'html_tag',
       '#tag' => 'div',
@@ -71,12 +70,12 @@ class RouteExampleController extends ControllerBase {
     $build[] = [
       '#type' => 'html_tag',
       '#tag' => 'div',
-      '#value' => $this->t('Created: @created', ['@created' => $date_formater->format($user->getCreatedTime())]),
+      '#value' => $this->t('Created: @created', ['@created' => $this->dateFormatter->format($user->getCreatedTime())]),
     ];
     $build[] = [
       '#type' => 'html_tag',
       '#tag' => 'div',
-      '#value' => $this->t('Last Login: @login', ['@login' => $date_formater->format($user->getLastLoginTime())]),
+      '#value' => $this->t('Last Login: @login', ['@login' => $this->dateFormatter->format($user->getLastLoginTime())]),
     ];
 
     return $build;
