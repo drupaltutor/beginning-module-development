@@ -6,11 +6,31 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RouteExampleController extends ControllerBase {
+
+  /**
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
+  protected DateFormatterInterface $dateFormatter;
+
+  /**
+   * @param DateFormatterInterface $dateFormatter
+   */
+  public function __construct(DateFormatterInterface $dateFormatter) {
+    $this->dateFormatter = $dateFormatter;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('date.formatter')
+    );
+  }
 
   public function helloWorld() {
     return [
