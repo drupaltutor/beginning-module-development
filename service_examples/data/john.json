@@ -1,0 +1,8 @@
+{
+  "first_name": "John",
+  "last_name": "Doe",
+  "title": "Web Developer",
+  "department": "Marketing",
+  "hire_date": "2018-02-25",
+  "photo_url": "https://drupaltutor.github.io/beginning-module-development/service_examples/data/john2.jpg"
+}
