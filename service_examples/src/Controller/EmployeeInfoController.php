@@ -4,6 +4,7 @@ namespace Drupal\service_examples\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\service_examples\HrConnector;
+use Drupal\service_examples\HrConnectorInterface;
 use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -15,17 +16,17 @@ class EmployeeInfoController extends ControllerBase {
   /**
    * The service_examples.hr_connector service.
    *
-   * @var \Drupal\service_examples\HrConnector
+   * @var \Drupal\service_examples\HrConnectorInterface
    */
   protected $hrConnector;
 
   /**
    * The controller constructor.
    *
-   * @param \Drupal\service_examples\HrConnector $hr_connector
+   * @param \Drupal\service_examples\HrConnectorInterface $hr_connector
    *   The service_examples.hr_connector service.
    */
-  public function __construct(HrConnector $hr_connector) {
+  public function __construct(HrConnectorInterface $hr_connector) {
     $this->hrConnector = $hr_connector;
   }
 

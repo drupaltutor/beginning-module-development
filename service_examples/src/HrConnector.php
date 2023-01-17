@@ -5,9 +5,9 @@ namespace Drupal\service_examples;
 use Drupal\user\UserInterface;
 
 /**
- * Service description.
+ * Connects the Drupal website with the HR database.
  */
-class HrConnector {
+class HrConnector implements HrConnectorInterface {
 
   /**
    * Retrieves employee information for the given user account
