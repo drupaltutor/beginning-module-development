@@ -1,3 +1,4 @@
 services:
   service_examples.hr_connector:
-    class: Drupal\service_examples\HrConnector
+    class: Drupal\service_examples\HrConnectorSaas
+    arguments: ['@http_client']
