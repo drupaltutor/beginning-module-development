@@ -3,6 +3,7 @@
 namespace Drupal\service_examples;
 
 use Drupal\user\UserInterface;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 
 /**
@@ -11,16 +12,22 @@ use GuzzleHttp\Exception\RequestException;
 class HrConnectorSaaS implements HrConnectorInterface {
 
   /**
+   * @var ClientInterface
+   */
+  protected ClientInterface $httpClient;
+
+  public function __construct(ClientInterface $http_client) {
+    $this->httpClient = $http_client;
+  }
+
+  /**
    * Retrieves employee information for the given user account
    *
    * @param UserInterface $user
    */
   public function getEmployeeInformation(UserInterface $user) {
-    /** @var \GuzzleHttp\ClientInterface $http_client */
-    $http_client = \Drupal::service('http_client');
-
     try {
-      $response = $http_client->request(
+      $response = $this->httpClient->request(
         'GET',
         'https://drupaltutor.github.io/beginning-module-development/service_examples/data/' . $user->getAccountName() . '.json',
       );
