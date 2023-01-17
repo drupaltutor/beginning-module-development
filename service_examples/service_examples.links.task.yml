@@ -1,0 +1,5 @@
+service_examples.user_employee_info:
+  title: 'Employee Info'
+  route_name: service_examples.user_employee_info
+  base_route: entity.user.canonical
+  weight: 50

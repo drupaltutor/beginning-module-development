@@ -43,9 +43,33 @@ class EmployeeInfoController extends ControllerBase {
    */
   public function displayEmployeeInformation(UserInterface $user) {
 
-    $build['content'] = [
-      '#type' => 'item',
-      '#markup' => $this->t('It works!'),
+    $info = $this->hrConnector->getEmployeeInformation($user);
+
+    $build['name'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'h2',
+      '#value' => $info['first_name'] . ' ' . $info['last_name'],
+    ];
+    $build['title'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'div',
+      '#value' => $info['title'],
+    ];
+    $build['department'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'div',
+      '#value' => $this->t('Department: @department', ['@department' => $info['department']]),
+    ];
+    if ($info['hire_date'] !== NULL) {
+      $build['hire_date'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'div',
+        '#value' => $this->t('Hired: @hired', ['@hired' => $info['hire_date']]),
+      ];
+    }
+    $build['photo'] = [
+      '#theme' => 'image',
+      '#uri' => $info['photo_url'],
     ];
 
     return $build;
