@@ -1,0 +1,7 @@
+service_examples.user_employee_info:
+  path: '/user/{user}/employee-info'
+  defaults:
+    _title: 'Employee Information'
+    _controller: '\Drupal\service_examples\Controller\EmployeeInfoController::displayEmployeeInformation'
+  requirements:
+    _permission: 'access content'
