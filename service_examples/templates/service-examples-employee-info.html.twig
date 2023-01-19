@@ -10,10 +10,13 @@
 			<div class="department">{{ employee.department }}</div>
 		{% endif %}
 
-		{% if employee.hire_date %}
+		{% if days_since_hire %}
 			<div class="hire-date">
-				<label>{{ 'Hired' | t }}:</label>
-				{{ employee.hire_date }}</div>
+				<label>{{ 'Team member for' | t }}</label>
+        {% trans %}
+          {{ days_since_hire }} days
+        {% endtrans %}
+      </div>
 		{% endif %}
 	</div>
 

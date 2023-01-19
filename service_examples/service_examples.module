@@ -10,3 +10,11 @@ function service_examples_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
+
+function template_preprocess_service_examples_employee_info(&$variables) {
+  if (!empty($variables['employee']['hire_date'])) {
+    $hire_date = new \DateTime($variables['employee']['hire_date']);
+    $now = new \DateTime();
+    $variables['days_since_hire'] = $now->diff($hire_date)->format('%a');
+  }
+}
