@@ -1,0 +1,22 @@
+.employee-info {
+  position: relative;
+  border: 2px solid #eaeef0;
+  padding: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.employee-info h2 {
+  margin-top: 0;
+}
+
+.employee-info .photo {
+  max-width: 175px;
+}
+
+.employee-info .photo img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+}

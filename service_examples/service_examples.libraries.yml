@@ -1,0 +1,4 @@
+employee-info:
+  css:
+    component:
+      css/employee-info.css: {}
