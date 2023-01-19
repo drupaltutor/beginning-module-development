@@ -1,0 +1,22 @@
+<div class="employee-info">
+	<div class="text">
+		<h2>{{ employee.first_name }}
+			{{ employee.last_name }}</h2>
+
+		<div class="title">{{ employee.title }}</div>
+
+		{% if employee.department %}
+			<div class="department">{{ employee.department }}</div>
+		{% endif %}
+
+		{% if employee.hire_date %}
+			<div class="hire-date">
+				<label>{{ 'Hired' | t }}:</label>
+				{{ employee.hire_date }}</div>
+		{% endif %}
+	</div>
+
+	{% if employee.photo_url %}
+		<div class="photo"><img src="{{ employee.photo_url }}"/></div>
+	{% endif %}
+</div>
