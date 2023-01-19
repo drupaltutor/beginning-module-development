@@ -14,6 +14,8 @@
 			<div class="hire-date">
 				<label>{{ 'Team member for' | t }}</label>
         {% trans %}
+          {{ days_since_hire }} day
+        {% plural days_since_hire %}
           {{ days_since_hire }} days
         {% endtrans %}
       </div>
