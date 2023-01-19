@@ -34,7 +34,7 @@ class RouteExampleController extends ControllerBase {
 
   public function helloWorld() {
     return [
-      '#markup' => $this->t('Hello world!'),
+      '#plain_text' => $this->t('Hello world!'),
     ];
   }
 
@@ -90,7 +90,8 @@ class RouteExampleController extends ControllerBase {
     $node_storage = $this->entityTypeManager()->getStorage('node');
     $query = $node_storage->getQuery()
       ->accessCheck(TRUE)
-      ->range(0, $limit);
+      ->sort('nid')
+      ->pager(4);
     if ($type !== '_all') {
       $query->condition('type', $type);
     }
@@ -113,9 +114,14 @@ class RouteExampleController extends ControllerBase {
     }
 
     return [
-      '#theme' => 'table',
-      '#header' => $header,
-      '#rows' => $rows,
+      'results' => [
+        '#theme' => 'table',
+        '#header' => $header,
+        '#rows' => $rows,
+      ],
+      'pager' => [
+        '#type' => 'pager',
+      ]
     ];
   }
 
