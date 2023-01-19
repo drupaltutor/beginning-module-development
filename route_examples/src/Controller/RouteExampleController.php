@@ -5,6 +5,7 @@ namespace Drupal\route_examples\Controller;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
@@ -34,11 +35,17 @@ class RouteExampleController extends ControllerBase {
   }
 
   public function helloWorld() {
-    return [
+    $cache = new CacheableMetadata();
+    $cache->setCacheMaxAge(0);
+
+    $build = [
       '#plain_text' => $this->t('Hello world! The time is: @time.', [
         '@time' => (new DrupalDateTime())->format('H:i:s'),
       ]),
     ];
+    $cache->applyTo($build);
+
+    return $build;
   }
 
   public function helloUser() {
