@@ -7,6 +7,7 @@ use Drupal\Component\Utility\Xss;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Datetime\DateFormatterInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
@@ -34,7 +35,9 @@ class RouteExampleController extends ControllerBase {
 
   public function helloWorld() {
     return [
-      '#plain_text' => $this->t('Hello world!'),
+      '#plain_text' => $this->t('Hello world! The time is: @time.', [
+        '@time' => (new DrupalDateTime())->format('H:i:s'),
+      ]),
     ];
   }
 
