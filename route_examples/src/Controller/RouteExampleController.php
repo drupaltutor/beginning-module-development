@@ -66,6 +66,9 @@ class RouteExampleController extends ControllerBase {
   }
 
   public function userInfo(UserInterface $user) {
+    $cache = new CacheableMetadata();
+    $cache->addCacheableDependency($user);
+
     $build = [];
 
     $build[] = [
@@ -88,6 +91,10 @@ class RouteExampleController extends ControllerBase {
       '#tag' => 'div',
       '#value' => $this->t('Last Login: @login', ['@login' => $this->dateFormatter->format($user->getLastLoginTime())]),
     ];
+
+    $cache->addCacheContexts(['timezone']);
+
+    $cache->applyTo($build);
 
     return $build;
   }
