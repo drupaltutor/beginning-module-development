@@ -31,8 +31,6 @@ route_examples.node_list:
     _title: 'Node List'
     limit: 10
     type: _all
-  options:
-    _admin_route: TRUE
   requirements:
     _permission: 'access content'
     limit: '\d+'

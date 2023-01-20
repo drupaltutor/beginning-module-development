@@ -6,6 +6,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Cache\Context\ContextCacheKeys;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
@@ -97,6 +98,7 @@ class RouteExampleController extends ControllerBase {
 
 
   public function nodeList(int $limit, string $type) {
+    $cache = new CacheableMetadata();
     $node_storage = $this->entityTypeManager()->getStorage('node');
     $query = $node_storage->getQuery()
       ->accessCheck(TRUE)
@@ -116,6 +118,7 @@ class RouteExampleController extends ControllerBase {
     ];
     $rows = [];
     foreach ($nodes as $node) {
+      $cache->addCacheTags(['node:' . $node->id()]);
       $rows[] = [
         $node->id(),
         $node->bundle(),
@@ -123,7 +126,9 @@ class RouteExampleController extends ControllerBase {
       ];
     }
 
-    return [
+    $cache->addCacheTags(['node_list']);
+
+    $build = [
       'results' => [
         '#theme' => 'table',
         '#header' => $header,
@@ -131,8 +136,12 @@ class RouteExampleController extends ControllerBase {
       ],
       'pager' => [
         '#type' => 'pager',
-      ]
+      ],
     ];
+
+    $cache->applyTo($build);
+
+    return $build;
   }
 
   public function nodeCompare(NodeInterface $node1, NodeInterface $node2) {
