@@ -118,7 +118,7 @@ class RouteExampleController extends ControllerBase {
     ];
     $rows = [];
     foreach ($nodes as $node) {
-      $cache->addCacheTags(['node:' . $node->id()]);
+      $cache->addCacheableDependency($node);
       $rows[] = [
         $node->id(),
         $node->bundle(),
